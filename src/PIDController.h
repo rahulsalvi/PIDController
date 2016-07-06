@@ -39,7 +39,7 @@ class PIDController {
     public:
         PIDController();
         PIDController(Timer* timer, double p = 0, double i = 0, double d = 0, double f = 0);
-        virtual ~PIDController();
+        virtual ~PIDController() {}
 
         void start();
         void reset();
