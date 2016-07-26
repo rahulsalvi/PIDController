@@ -88,6 +88,9 @@ void PIDController::setP(double p) {
 
 void PIDController::setI(double i) {
     _i = i;
+    if (_i) {
+        _integratorLimit /= _i;
+    }
 }
 
 void PIDController::setD(double d) {
@@ -122,6 +125,9 @@ void PIDController::setPercentTolerance(double tolerance) {
 
 void PIDController::setIntegratorLimit(double limit) {
     _integratorLimit = limit;
+    if (_i) {
+        _integratorLimit /= _i;
+    }
 }
 
 Timer* PIDController::timer() const {
