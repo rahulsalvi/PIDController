@@ -205,14 +205,14 @@ double PIDController::getOutput(double input, double setpoint, double dt) {
     _error = _setpoint - input;
 
     if (_absoluteTolerance) {
-        if (input > _setpoint - _absoluteTolerance && input < _setpoint + _absoluteTolerance) {
+        if ((input > (_setpoint - _absoluteTolerance)) && (input < (_setpoint + _absoluteTolerance))) {
             _isWithinTolerance = true;
         } else {
             _isWithinTolerance = false;
         }
     } else if (_percentTolerance) {
         double tolerance = _percentTolerance * _setpoint;
-        if (input > _setpoint - tolerance && input < _setpoint + tolerance) {
+        if ((input > (_setpoint - tolerance)) && (input < (_setpoint + tolerance))) {
             _isWithinTolerance = true;
         } else {
             _isWithinTolerance = false;
@@ -260,7 +260,7 @@ double PIDController::calculateOutput(bool useTimer) {
     _derivative = ((_error - _previousError) / _dt);
     _previousError = _error;
 
-    if (_integratorLimit && absoluteValue(_integral) > _integratorLimit) {
+    if (_integratorLimit && (absoluteValue(_integral) > _integratorLimit)) {
         if (_integral < 0) {
             _integral = -_integratorLimit;
         } else {
