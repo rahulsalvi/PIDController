@@ -262,13 +262,13 @@ double PIDController::calculateOutput(bool useTimer) {
 
     if (_integratorLimit && absoluteValue(_integral) > _integratorLimit) {
         if (_integral < 0) {
-            _output = (_p * _error) + (_i * -_integratorLimit) + (_d * _derivative) + (_f * _setpoint);
+            _integral = -_integratorLimit;
         } else {
-            _output = (_p * _error) + (_i *  _integratorLimit) + (_d * _derivative) + (_f * _setpoint);
+            _integral = _integratorLimit;
         }
-    } else {
-        _output = (_p * _error) + (_i * _integral) + (_d * _derivative) + (_f * _setpoint);
     }
+
+    _output = (_p * _error) + (_i * _integral) + (_d * _derivative) + (_f * _setpoint);
 
     if (_minOutput && _maxOutput) {
         if (_output > _maxOutput) {
